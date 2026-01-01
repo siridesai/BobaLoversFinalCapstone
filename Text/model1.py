@@ -145,17 +145,14 @@ if __name__ == "__main__":
                 print(f"Sample output: {outputs[0]}")
                 print(f"Sample label: {labels[0]}")
                 
-
-
         avg_loss = running_loss / total_batches
         loss_vals.append(avg_loss)
         avg_val_loss = evaluate(model, val_dataloader, criterion)
         if avg_val_loss < best_val_loss:
             best_val_loss = avg_val_loss
             torch.save(model.state_dict(), "best_model.pth")
-            print("✅ Model saved with validation loss:", best_val_loss)
-        print(f"Epoch {epoch+1}, Average Loss: {avg_loss:.4f}, Validation Loss: {avg_val_loss:.4f}")
-        
+            print("Model saved with validation loss:", best_val_loss)
+        print(f"Epoch {epoch+1}, Average Loss: {avg_loss:.4f}, Validation Loss: {avg_val_loss:.4f}")    
     
     print(loss_vals)
     model.load_state_dict(torch.load("best_model.pth"))
